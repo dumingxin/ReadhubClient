@@ -52,14 +52,11 @@ class TopicFragment : Fragment {
             val adapter = TopicListAdapter(context, dataList)
             recyclerView.layoutManager = LinearLayoutManager(context)
             recyclerView.adapter = adapter
-            if (lastCursor == null) {
-                lastCursor = PAGE_SIZE.toLong()
-            } else {
-                lastCursor = lastCursor!! + PAGE_SIZE.toLong()
-            }
+            lastCursor = data.data?.last()?.order
             smartRefreshLayout.finishLoadmore()
             smartRefreshLayout.finishRefresh()
             adapter.notifyDataSetChanged()
+            recyclerView.scrollToPosition(dataList.size - PAGE_SIZE)
         }, { error ->
             error.printStackTrace()
             smartRefreshLayout.finishLoadmore()

@@ -24,7 +24,7 @@ class TimeTextView : TextView {
         try {
             val sdf = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
             val date = sdf.parse(text)
-            val timestamp = date.time - 4 * 60 * 60 * 1000
+            val timestamp = date.time+8*60*60*1000
             val current = System.currentTimeMillis()
             val timeSpan = (current - timestamp) / 1000
             return TimeDescription(timeSpan).toString()
