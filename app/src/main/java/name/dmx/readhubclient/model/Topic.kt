@@ -7,11 +7,11 @@ import java.util.*
  */
 class Topic {
     var id: String = ""
-    var createdAt: Date = Date()
+    var createdAt: String = ""
     var order: Long = 0L
-    var publishDate: Date = Date()
+    var publishDate: String = ""
     var summary: String = ""
     var title: String = ""
-    var updatedAt: Date = Date()
+    var updatedAt: String = ""
     var newsArray: Array<News> = emptyArray()
 }

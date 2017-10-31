@@ -1,7 +1,5 @@
 package name.dmx.readhubclient.model
 
-import java.util.*
-
 /**
  * Created by dmx on 17-10-30.
  */
@@ -15,5 +13,5 @@ class News {
     var mobileUrl: String = ""
     var authorName: String = ""
     var duplicateId: Int = 0
-    var publishDate: Date = Date()
+    var publishDate: String = ""
 }
