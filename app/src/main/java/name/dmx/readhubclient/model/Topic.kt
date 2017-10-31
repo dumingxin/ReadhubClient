@@ -6,7 +6,7 @@ import java.util.*
  * Created by dmx on 17-10-30.
  */
 class Topic {
-    var id: Long = 0L
+    var id: String = ""
     var createdAt: Date = Date()
     var order: Long = 0L
     var publishDate: Date = Date()
