@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import name.dmx.readhubclient.R
 import name.dmx.readhubclient.model.Topic
+import name.dmx.readhubclient.widgets.TimeTextView
 
 /**
  * Created by dmx on 17-10-31.
@@ -16,7 +17,7 @@ class TopicListAdapter(private val context: Context, val data: List<Topic>) : Re
     override fun onBindViewHolder(holder: MyViewHolder?, position: Int) {
         val item = data[position]
         holder?.title?.text = item.title
-//        holder?.time?.text = item.createdAt.toString()
+        holder?.time?.text = item.createdAt.toString()
         holder?.summary?.text = item.summary
     }
 
@@ -30,7 +31,7 @@ class TopicListAdapter(private val context: Context, val data: List<Topic>) : Re
 
     inner class MyViewHolder : RecyclerView.ViewHolder {
         var title: TextView
-        var time: TextView
+        var time: TimeTextView
         var summary: TextView
 
         constructor(view: View) : super(view) {
