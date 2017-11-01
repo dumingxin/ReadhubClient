@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
+import android.support.v4.widget.NestedScrollView
 import android.support.v7.app.AppCompatActivity
 import android.view.KeyEvent
 import android.webkit.JsPromptResult
@@ -51,7 +52,7 @@ class WebViewActivity : AppCompatActivity() {
 
     private fun setupWebView() {
         mAgentWeb = AgentWeb.with(this)//
-                .setAgentWebParent(container, LinearLayout.LayoutParams(-1, -1))//
+                .setAgentWebParent(container,LinearLayout.LayoutParams(-1, -1))//
                 .useDefaultIndicator()//
                 .defaultProgressBarColor()
 //                .setReceivedTitleCallback(mCallback)
