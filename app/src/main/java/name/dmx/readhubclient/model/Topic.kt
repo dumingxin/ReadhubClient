@@ -14,4 +14,5 @@ class Topic {
     var title: String = ""
     var updatedAt: String = ""
     var newsArray: Array<News> = emptyArray()
+    var extra: Extra? = null
 }

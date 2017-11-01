@@ -14,15 +14,21 @@ import name.dmx.readhubclient.widgets.TimeTextView
  * Created by dmx on 17-10-31.
  */
 class TopicListAdapter(private val context: Context, val data: List<Topic>) : RecyclerView.Adapter<TopicListAdapter.MyViewHolder>() {
+    var onItemClickListener: OnItemClickListener? = null
     override fun onBindViewHolder(holder: MyViewHolder?, position: Int) {
         val item = data[position]
         holder?.title?.text = item.title
         holder?.time?.text = item.createdAt.toString()
         holder?.summary?.text = item.summary
+        holder?.view?.tag = position
     }
 
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): MyViewHolder {
-        return MyViewHolder(LayoutInflater.from(context).inflate(R.layout.toplic_list_item, null, false))
+        val view = LayoutInflater.from(context).inflate(R.layout.toplic_list_item, null, false)
+        view.setOnClickListener {
+            onItemClickListener?.onItemClick(view, view.tag as Int)
+        }
+        return MyViewHolder(view)
     }
 
     override fun getItemCount(): Int {
@@ -30,14 +36,20 @@ class TopicListAdapter(private val context: Context, val data: List<Topic>) : Re
     }
 
     inner class MyViewHolder : RecyclerView.ViewHolder {
+        var view: View
         var title: TextView
         var time: TimeTextView
         var summary: TextView
 
         constructor(view: View) : super(view) {
+            this.view = view
             title = view.findViewById(R.id.title)
             time = view.findViewById(R.id.time)
             summary = view.findViewById(R.id.summary)
         }
+    }
+
+    interface OnItemClickListener {
+        fun onItemClick(view: View, position: Int)
     }
 }
