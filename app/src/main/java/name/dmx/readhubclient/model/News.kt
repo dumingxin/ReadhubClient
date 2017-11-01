@@ -7,6 +7,7 @@ class News {
     var id: String = ""
     var url: String = ""
     var title: String = ""
+    var summary: String = ""
     var content: String = ""
     var groupId: Long = 0L
     var siteName: String = ""

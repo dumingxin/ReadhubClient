@@ -3,6 +3,7 @@ package name.dmx.readhubclient.widgets
 import android.content.Context
 import android.util.AttributeSet
 import android.widget.TextView
+import name.dmx.readhubclient.DateUtil
 import java.text.SimpleDateFormat
 
 /**
@@ -22,9 +23,8 @@ class TimeTextView : TextView {
             return text
         }
         try {
-            val sdf = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
-            val date = sdf.parse(text)
-            val timestamp = date.time+8*60*60*1000
+            val date = DateUtil.str2Date(text, "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
+            val timestamp = date?.time!!
             val current = System.currentTimeMillis()
             val timeSpan = (current - timestamp) / 1000
             return TimeDescription(timeSpan).toString()
@@ -55,7 +55,7 @@ class TimeTextView : TextView {
             if (minute > 0) {
                 return "$minute 分钟前"
             }
-            return ""
+            return "刚刚"
         }
     }
 }
