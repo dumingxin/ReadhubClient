@@ -47,13 +47,13 @@ class TimeTextView : TextView {
 
         override fun toString(): String {
             if (day > 0) {
-                return "$day 天前"
+                return "${day}天前"
             }
             if (hour > 0) {
-                return "$hour 小时前"
+                return "${hour}小时前"
             }
             if (minute > 0) {
-                return "$minute 分钟前"
+                return "${minute}分钟前"
             }
             return "刚刚"
         }
