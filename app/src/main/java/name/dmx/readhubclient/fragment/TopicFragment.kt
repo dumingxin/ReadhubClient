@@ -37,7 +37,6 @@ class TopicFragment : Fragment {
         getData()
         smartRefreshLayout.setOnRefreshListener {
             lastCursor = null
-            dataList.clear()
             getData()
         }
         smartRefreshLayout.setOnLoadmoreListener {
@@ -48,6 +47,9 @@ class TopicFragment : Fragment {
     private fun getData() {
         val observable = DataRepository.getService(context).getTopics(lastCursor, PAGE_SIZE).compose(SchedulerTransformer())
         observable.subscribe({ data ->
+            if (lastCursor == null) {
+                dataList.clear()
+            }
             dataList.addAll(dataList.size, data.data?.toList()!!)
             val adapter = TopicListAdapter(context, dataList)
             recyclerView.layoutManager = LinearLayoutManager(context)
