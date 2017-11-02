@@ -7,10 +7,10 @@
             android:icon="@drawable/iconfont_about"
             android:title="@string/menu_key_readhub" />
 
-        <item
-            android:id="@+id/navigation_item_share"
-            android:icon="@drawable/iconfont_share"
-            android:title="@string/menu_key_share" />
+        <!--<item-->
+            <!--android:id="@+id/navigation_item_share"-->
+            <!--android:icon="@drawable/iconfont_share"-->
+            <!--android:title="@string/menu_key_share" />-->
 
         <item
             android:id="@+id/navigation_item_update"

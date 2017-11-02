@@ -6,6 +6,8 @@ import android.graphics.Color
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.KeyEvent
+import android.view.Menu
+import android.view.MenuItem
 import android.webkit.JsPromptResult
 import android.webkit.JsResult
 import android.webkit.WebChromeClient
@@ -14,6 +16,8 @@ import android.widget.LinearLayout
 import com.just.library.AgentWeb
 import kotlinx.android.synthetic.main.webview_activity.*
 import name.dmx.readhubclient.R
+import android.support.v4.content.ContextCompat.startActivity
+import android.app.Activity
 
 
 class WebViewActivity : AppCompatActivity() {
@@ -34,15 +38,33 @@ class WebViewActivity : AppCompatActivity() {
         setupWebView()
     }
 
-
-    protected fun onLoadUri(webView: WebView) {
-        webView.loadUrl(url)
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.share, menu)
+        return super.onCreateOptionsMenu(menu)
     }
 
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        return when (item?.itemId) {
+            R.id.navigation_item_share -> {
+                shareToFriend(this)
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+
+    }
+
+    private fun shareToFriend(activity: Activity) {
+        val sendIntent = Intent()
+        sendIntent.action = Intent.ACTION_SEND
+        sendIntent.putExtra(Intent.EXTRA_TEXT, url)
+        sendIntent.type = "text/plain"
+        activity.startActivity(Intent.createChooser(sendIntent, title))
+    }
 
     private fun setupToolbar() {
         toolbar.setTitleTextColor(Color.WHITE)
-        toolbar.title = ""
+        toolbar.title = title
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         toolbar.setNavigationOnClickListener {
@@ -52,7 +74,7 @@ class WebViewActivity : AppCompatActivity() {
 
     private fun setupWebView() {
         mAgentWeb = AgentWeb.with(this)//
-                .setAgentWebParent(container,LinearLayout.LayoutParams(-1, -1))//
+                .setAgentWebParent(container, LinearLayout.LayoutParams(-1, -1))//
                 .useDefaultIndicator()//
                 .defaultProgressBarColor()
 //                .setReceivedTitleCallback(mCallback)

@@ -1,6 +1,7 @@
 package name.dmx.readhubclient.adapter
 
 import android.content.Context
+import android.support.v7.widget.CardView
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -22,15 +23,16 @@ class NewsListAdapter(private val context: Context, val data: List<News>) : Recy
         holder?.time?.text = item.publishDate
         holder?.summary?.text = item.summary
         holder?.siteAndAuthor?.text = item.siteName + if (item.authorName != null) "/ ${item.authorName}" else ""
-        holder?.view?.tag = position
+        holder?.carView?.tag = position
     }
 
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): MyViewHolder {
         val view = LayoutInflater.from(context).inflate(R.layout.news_list_item, null, false)
-        view.setOnClickListener {
-            onItemClickListener?.onItemClick(view, view.tag as Int)
+        val viewHolder = MyViewHolder(view)
+        viewHolder.carView.setOnClickListener {
+            onItemClickListener?.onItemClick(viewHolder.carView, viewHolder.carView.tag as Int)
         }
-        return MyViewHolder(view)
+        return viewHolder
     }
 
     override fun getItemCount(): Int {
@@ -38,14 +40,14 @@ class NewsListAdapter(private val context: Context, val data: List<News>) : Recy
     }
 
     inner class MyViewHolder : RecyclerView.ViewHolder {
-        var view: View
+        var carView: CardView
         var title: TextView
         var time: TimeTextView
         var summary: TextView
         var siteAndAuthor: TextView
 
         constructor(view: View) : super(view) {
-            this.view = view
+            this.carView = view.findViewById(R.id.cardView)
             title = view.findViewById(R.id.title)
             time = view.findViewById(R.id.time)
             summary = view.findViewById(R.id.summary)

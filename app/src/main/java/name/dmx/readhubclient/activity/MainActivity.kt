@@ -13,6 +13,11 @@ import name.dmx.readhubclient.adapter.TabFragmentAdapter
 import name.dmx.readhubclient.fragment.NewsFragment
 import name.dmx.readhubclient.fragment.TechNewsFragment
 import name.dmx.readhubclient.fragment.TopicFragment
+import android.content.Intent
+import android.support.v4.content.ContextCompat.startActivity
+import android.app.Activity
+
+
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
@@ -46,4 +51,5 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         drawerLayout.closeDrawers()
         return true
     }
+
 }

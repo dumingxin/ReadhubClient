@@ -14,4 +14,9 @@
     <style name="toolbar_theme" parent="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
         <item name="colorControlNormal">#ffffff</item>
     </style>
+
+    <style name="time_textAppearance" parent="@style/TextAppearance.AppCompat">
+        <item name="android:textColor">#737373</item>
+        <item name="android:textSize">12sp</item>
+    </style>
 </resources>
