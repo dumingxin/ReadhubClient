@@ -3,7 +3,7 @@ package name.dmx.readhubclient.widgets
 import android.content.Context
 import android.util.AttributeSet
 import android.widget.TextView
-import name.dmx.readhubclient.DateUtil
+import name.dmx.readhubclient.toDate
 import java.text.SimpleDateFormat
 
 /**
@@ -23,7 +23,7 @@ class TimeTextView : TextView {
             return text
         }
         try {
-            val date = DateUtil.str2Date(text, "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
+            val date = text.toDate("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
             val timestamp = date?.time!!
             val current = System.currentTimeMillis()
             val timeSpan = (current - timestamp) / 1000

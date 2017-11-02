@@ -8,12 +8,12 @@ import android.view.View
 import android.view.ViewGroup
 import com.hzzh.baselibrary.net.transformer.SchedulerTransformer
 import kotlinx.android.synthetic.main.tech_news_fragment.*
-import name.dmx.readhubclient.DateUtil
 import name.dmx.readhubclient.R
 import name.dmx.readhubclient.WebViewActivity
 import name.dmx.readhubclient.adapter.NewsListAdapter
 import name.dmx.readhubclient.http.DataRepository
 import name.dmx.readhubclient.model.News
+import name.dmx.readhubclient.toDate
 
 /**
  * Created by dmx on 17-10-31.
@@ -65,7 +65,7 @@ class TechNewsFragment : Fragment() {
             adapter.onItemClickListener = onItemClickListener
             recyclerView.layoutManager = LinearLayoutManager(context)
             recyclerView.adapter = adapter
-            lastCursor = DateUtil.str2Date(data.data?.last()?.publishDate!!, "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")?.time!!
+            lastCursor = data.data?.last()?.publishDate!!.toDate("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")?.time!!
             smartRefreshLayout.finishLoadmore()
             smartRefreshLayout.finishRefresh()
             adapter.notifyDataSetChanged()

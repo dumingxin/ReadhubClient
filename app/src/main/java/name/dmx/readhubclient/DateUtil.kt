@@ -6,16 +6,13 @@ import java.util.*
 /**
  * Created by dmx on 17-11-1.
  */
-object DateUtil {
-    fun str2Date(str: String, pattern: String): Date? {
-        try {
-            val sdf = SimpleDateFormat(pattern)
-            val date = sdf.parse(str)
-            date.time = date.time + 8 * 60 * 60 * 1000
-            return date
-        } catch (ex: Exception) {
-            ex.printStackTrace()
-        }
-        return null
+fun String.toDate(pattern: String): Date? {
+    try {
+        val sdf = SimpleDateFormat(pattern, Locale.CHINA)
+        sdf.timeZone = TimeZone.getTimeZone("UTC")
+        return sdf.parse(this)
+    } catch (ex: Exception) {
+        ex.printStackTrace()
     }
+    return null
 }
