@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/navigation_item_readhub"
+            android:icon="@drawable/iconfont_about"
+
+            android:title="@string/menu_key_readhub" />
+
+        <item
+            android:id="@+id/navigation_item_share"
+            android:icon="@drawable/iconfont_share"
+
+            android:title="@string/menu_key_share" />
+
+        <item
+            android:id="@+id/navigation_item_update"
+            android:icon="@drawable/iconfont_update"
+
+            android:title="@string/menu_key_update" />
+
+        <item
+            android:id="@+id/navigation_item_me"
+            android:icon="@drawable/iconfont_blog"
+            android:title="@string/menu_key_me" />
+
+    </group>
+</menu>
