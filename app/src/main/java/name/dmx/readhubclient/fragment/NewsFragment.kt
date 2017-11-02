@@ -9,11 +9,11 @@ import android.view.ViewGroup
 import com.hzzh.baselibrary.net.transformer.SchedulerTransformer
 import kotlinx.android.synthetic.main.news_fragment.*
 import name.dmx.readhubclient.R
-import name.dmx.readhubclient.WebViewActivity
+import name.dmx.readhubclient.activity.WebViewActivity
 import name.dmx.readhubclient.adapter.NewsListAdapter
 import name.dmx.readhubclient.http.DataRepository
 import name.dmx.readhubclient.model.News
-import name.dmx.readhubclient.toDate
+import name.dmx.readhubclient.util.toDate
 
 /**
  * Created by dmx on 17-10-31.

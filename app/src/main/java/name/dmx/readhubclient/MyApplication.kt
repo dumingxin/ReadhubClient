@@ -6,6 +6,7 @@ import com.scwang.smartrefresh.header.MaterialHeader
 import com.scwang.smartrefresh.layout.SmartRefreshLayout
 import com.scwang.smartrefresh.layout.api.*
 import com.scwang.smartrefresh.layout.footer.ClassicsFooter
+import com.tencent.bugly.Bugly
 
 
 /**
@@ -27,5 +28,10 @@ class MyApplication : Application() {
                 return ClassicsFooter(context).setDrawableSize(20f)
             }
         })
+    }
+
+    override fun onCreate() {
+        super.onCreate()
+        Bugly.init(applicationContext, BuildConfig.buglyAppId, false)
     }
 }

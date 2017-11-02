@@ -1,4 +1,4 @@
-package name.dmx.readhubclient
+package name.dmx.readhubclient.util
 
 import java.text.SimpleDateFormat
 import java.util.*

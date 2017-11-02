@@ -3,14 +3,13 @@ package name.dmx.readhubclient.fragment
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.hzzh.baselibrary.net.transformer.SchedulerTransformer
 import kotlinx.android.synthetic.main.topic_fragment.*
 import name.dmx.readhubclient.R
-import name.dmx.readhubclient.WebViewActivity
+import name.dmx.readhubclient.activity.WebViewActivity
 import name.dmx.readhubclient.adapter.TopicListAdapter
 import name.dmx.readhubclient.http.DataRepository
 import name.dmx.readhubclient.model.Topic

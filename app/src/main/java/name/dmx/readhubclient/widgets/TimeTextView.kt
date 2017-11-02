@@ -3,8 +3,7 @@ package name.dmx.readhubclient.widgets
 import android.content.Context
 import android.util.AttributeSet
 import android.widget.TextView
-import name.dmx.readhubclient.toDate
-import java.text.SimpleDateFormat
+import name.dmx.readhubclient.util.toDate
 
 /**
  * Created by dmx on 17-10-31.

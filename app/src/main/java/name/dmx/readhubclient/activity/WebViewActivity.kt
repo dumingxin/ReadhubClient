@@ -1,10 +1,9 @@
-package name.dmx.readhubclient
+package name.dmx.readhubclient.activity
 
 import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
-import android.support.v4.widget.NestedScrollView
 import android.support.v7.app.AppCompatActivity
 import android.view.KeyEvent
 import android.webkit.JsPromptResult
@@ -14,6 +13,7 @@ import android.webkit.WebView
 import android.widget.LinearLayout
 import com.just.library.AgentWeb
 import kotlinx.android.synthetic.main.webview_activity.*
+import name.dmx.readhubclient.R
 
 
 class WebViewActivity : AppCompatActivity() {

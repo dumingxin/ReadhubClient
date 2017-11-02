@@ -1,4 +1,4 @@
-package name.dmx.readhubclient
+package name.dmx.readhubclient.activity
 
 import android.os.Bundle
 import android.support.design.widget.NavigationView
@@ -6,7 +6,9 @@ import android.support.design.widget.Snackbar
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
+import com.tencent.bugly.beta.Beta
 import kotlinx.android.synthetic.main.activity_main.*
+import name.dmx.readhubclient.R
 import name.dmx.readhubclient.adapter.TabFragmentAdapter
 import name.dmx.readhubclient.fragment.NewsFragment
 import name.dmx.readhubclient.fragment.TechNewsFragment
@@ -36,7 +38,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.title -> {
+            R.id.navigation_item_update -> {
+                Beta.checkUpgrade()
             }
             else -> Snackbar.make(toolbar, item!!.title, Snackbar.LENGTH_SHORT).show()
         }
