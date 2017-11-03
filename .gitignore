@@ -13,3 +13,9 @@
 gradle\.properties
 
 *.apk
+
+\.settings/
+
+\.project
+
+app/\.classpath
