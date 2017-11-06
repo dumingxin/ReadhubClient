@@ -19,3 +19,5 @@ gradle\.properties
 \.project
 
 app/\.classpath
+
+app/release/output\.json

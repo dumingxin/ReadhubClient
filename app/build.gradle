@@ -10,8 +10,8 @@ android {
         applicationId "name.dmx.readhubclient"
         minSdkVersion 23
         targetSdkVersion 26
-        versionCode 2
-        versionName "1.0.1"
+        versionCode 3
+        versionName "1.0.2"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         ndk {
             //设置支持的SO库架构
