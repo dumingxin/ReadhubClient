@@ -42,6 +42,13 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             R.id.navigation_item_update -> {
                 Beta.checkUpgrade()
             }
+            R.id.navigation_item_readhub -> {
+                startActivity(WebViewActivity.makeIntent(this, "https://github.com/dumingxin/ReadhubClient/blob/master/README.md", "关于应用", ""))
+            }
+            R.id.navigation_item_me->{
+                startActivity(WebViewActivity.makeIntent(this, "https://github.com/dumingxin", "关于作者", ""))
+
+            }
             else -> Snackbar.make(toolbar, item!!.title, Snackbar.LENGTH_SHORT).show()
         }
         drawerLayout.closeDrawers()
