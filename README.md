@@ -12,6 +12,12 @@
 ![](./img/2.jpg)
 
 ## 下载地址
+二维码
+
+![](./img/qrcode.png)
+
+酷安
+
 https://www.coolapk.com/apk/166355
 
 ## Next
