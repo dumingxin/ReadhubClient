@@ -20,8 +20,5 @@
 
 https://www.coolapk.com/apk/166355
 
-## Next
-
-加入对Room和Paging的使用
 
 
