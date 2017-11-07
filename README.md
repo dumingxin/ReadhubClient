@@ -8,9 +8,10 @@
 
 ## 界面截图
 
+<div>
 <img src="./img/1.jpg" width="300px">
 <img src="./img/2.jpg" width="300px">
-
+</div>
 ## 下载地址
 二维码
 
