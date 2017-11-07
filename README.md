@@ -9,7 +9,7 @@
 ## 界面截图
 
 
-<img src="./img/1.jpg" width="400px"><img src="./img/2.jpg" width="400px">
+<img src="./img/1.jpg" width="400px">        <img src="./img/2.jpg" width="400px">
 
 ## 下载地址
 二维码
