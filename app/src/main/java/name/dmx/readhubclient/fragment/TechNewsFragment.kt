@@ -1,30 +1,49 @@
 package name.dmx.readhubclient.fragment
 
+import android.arch.lifecycle.LiveData
+import android.arch.lifecycle.Observer
+import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.hzzh.baselibrary.net.transformer.SchedulerTransformer
 import kotlinx.android.synthetic.main.tech_news_fragment.*
 import name.dmx.readhubclient.R
 import name.dmx.readhubclient.activity.WebViewActivity
 import name.dmx.readhubclient.adapter.NewsListAdapter
-import name.dmx.readhubclient.http.DataRepository
 import name.dmx.readhubclient.model.News
-import name.dmx.readhubclient.util.toDate
+import name.dmx.readhubclient.viewmodel.NewsViewModel
 
 /**
  * Created by dmx on 17-10-31.
  */
 class TechNewsFragment : Fragment() {
-    private var lastCursor: Long = 0L
     private val PAGE_SIZE = 10
-    private var isFirstPage = true
-    private val dataList: MutableList<News> = MutableList(0, { _ ->
-        News()
-    })
+    private var dataList: List<News> = ArrayList()
+    private lateinit var newsViewModel: NewsViewModel
+    private lateinit var newsLiveData: LiveData<List<News>>
+    private var adapter: NewsListAdapter? = null
+
+    private fun getObserver() = Observer<List<News>> { newsList ->
+        if (newsList != null) {
+            dataList = newsList
+            if (adapter == null) {
+                adapter = NewsListAdapter(context, dataList)
+                adapter!!.onItemClickListener = onItemClickListener
+                recyclerView.layoutManager = LinearLayoutManager(context)
+                recyclerView.adapter = adapter
+            } else {
+                adapter?.data = dataList
+            }
+            smartRefreshLayout.finishLoadmore()
+            smartRefreshLayout.finishRefresh()
+            adapter!!.notifyDataSetChanged()
+            recyclerView.scrollToPosition(dataList.size - PAGE_SIZE)
+        }
+    }
+
     private val onItemClickListener = object : NewsListAdapter.OnItemClickListener {
         override fun onItemClick(view: View, position: Int) {
             val item = dataList[position]
@@ -40,41 +59,15 @@ class TechNewsFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        getData()
+        newsViewModel = ViewModelProviders.of(this).get(NewsViewModel::class.java)
+        newsLiveData = newsViewModel.getLiveData(NewsViewModel.NewsType.TechNews, PAGE_SIZE)
+        newsLiveData.observe(this, getObserver())
         smartRefreshLayout.setOnRefreshListener {
-            isFirstPage = true
-            getData()
+            newsViewModel.refresh()
         }
         smartRefreshLayout.setOnLoadmoreListener {
-            isFirstPage = false
-            getData()
+            newsViewModel.loadMore()
         }
-    }
-
-    private fun getData() {
-        if (isFirstPage) {
-            lastCursor = System.currentTimeMillis()
-        }
-        val observable = DataRepository.getService(context).getTechNews(lastCursor, PAGE_SIZE).compose(SchedulerTransformer())
-        observable.subscribe({ data ->
-            if (isFirstPage) {
-                dataList.clear()
-            }
-            dataList.addAll(dataList.size, data.data?.toList()!!)
-            val adapter = NewsListAdapter(context, dataList)
-            adapter.onItemClickListener = onItemClickListener
-            recyclerView.layoutManager = LinearLayoutManager(context)
-            recyclerView.adapter = adapter
-            lastCursor = data.data?.last()?.publishDate!!.toDate("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")?.time!!
-            smartRefreshLayout.finishLoadmore()
-            smartRefreshLayout.finishRefresh()
-            adapter.notifyDataSetChanged()
-            recyclerView.scrollToPosition(dataList.size - PAGE_SIZE)
-        }, { error ->
-            error.printStackTrace()
-            smartRefreshLayout.finishLoadmore()
-            smartRefreshLayout.finishRefresh()
-        })
     }
 
     companion object {

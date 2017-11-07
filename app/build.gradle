@@ -10,8 +10,8 @@ android {
         applicationId "name.dmx.readhubclient"
         minSdkVersion 23
         targetSdkVersion 26
-        versionCode 3
-        versionName "1.0.2"
+        versionCode 4
+        versionName "1.0.3"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         ndk {
             //设置支持的SO库架构
@@ -47,8 +47,16 @@ dependencies {
     implementation 'com.just.agentweb:agentweb:2.0.1'
     implementation 'com.tencent.bugly:crashreport_upgrade:latest.release'//其中latest.release指代最新版本号，也可以指定明确的版本号，例如1.2.0
     implementation 'com.tencent.bugly:nativecrashreport:latest.release' //其中latest.release指代最新版本号，也可以指定明确的版本号，例如2.2.0
-    implementation 'com.aliyun.ams:alicloud-android-feedback:3.1.0@aar'
-    implementation 'com.aliyun.ams:alicloud-android-utdid:1.1.5.3'
-    implementation 'com.aliyun.ams:alicloud-android-ut:5.1.0'
-    implementation 'com.aliyun.ams:alicloud-android-utils:1.0.3'
+//    implementation 'com.aliyun.ams:alicloud-android-feedback:3.1.0@aar'
+//    implementation 'com.aliyun.ams:alicloud-android-utdid:1.1.5.3'
+//    implementation 'com.aliyun.ams:alicloud-android-ut:5.1.0'
+//    implementation 'com.aliyun.ams:alicloud-android-utils:1.0.3'
+
+    implementation "android.arch.lifecycle:runtime:1.0.3"
+    implementation "android.arch.lifecycle:extensions:1.0.0"
+    implementation "android.arch.persistence.room:runtime:1.0.0"
+    annotationProcessor "android.arch.persistence.room:compiler:1.0.0"
+    implementation "android.arch.persistence.room:rxjava2:1.0.0"
+    implementation "android.arch.paging:runtime:1.0.0-alpha3"
+
 }

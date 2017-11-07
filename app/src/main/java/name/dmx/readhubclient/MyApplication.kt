@@ -32,6 +32,11 @@ class MyApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()
+        instance = this
         Bugly.init(applicationContext, BuildConfig.buglyAppId, false)
+    }
+
+    companion object {
+        lateinit var instance: MyApplication
     }
 }

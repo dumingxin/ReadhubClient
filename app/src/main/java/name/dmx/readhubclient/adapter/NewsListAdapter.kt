@@ -15,7 +15,7 @@ import name.dmx.readhubclient.widgets.TimeTextView
 /**
  * Created by dmx on 17-10-31.
  */
-class NewsListAdapter(private val context: Context, val data: List<News>) : RecyclerView.Adapter<NewsListAdapter.MyViewHolder>() {
+class NewsListAdapter(private val context: Context, var data: List<News>) : RecyclerView.Adapter<NewsListAdapter.MyViewHolder>() {
     var onItemClickListener: OnItemClickListener? = null
     override fun onBindViewHolder(holder: MyViewHolder?, position: Int) {
         val item = data[position]

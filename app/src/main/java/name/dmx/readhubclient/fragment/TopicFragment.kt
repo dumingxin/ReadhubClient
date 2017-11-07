@@ -1,28 +1,49 @@
 package name.dmx.readhubclient.fragment
 
+import android.arch.lifecycle.LiveData
+import android.arch.lifecycle.Observer
+import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.hzzh.baselibrary.net.transformer.SchedulerTransformer
 import kotlinx.android.synthetic.main.topic_fragment.*
 import name.dmx.readhubclient.R
 import name.dmx.readhubclient.activity.WebViewActivity
 import name.dmx.readhubclient.adapter.TopicListAdapter
-import name.dmx.readhubclient.http.DataRepository
 import name.dmx.readhubclient.model.Topic
+import name.dmx.readhubclient.viewmodel.TopicViewModel
 
 /**
  * Created by dmx on 17-10-31.
  */
 class TopicFragment : Fragment() {
-    private var lastCursor: Long? = null
     private val PAGE_SIZE = 10
-    private val dataList: MutableList<Topic> = MutableList(0, { _ ->
-        Topic()
-    })
+    private var dataList: List<Topic> = ArrayList()
+    private lateinit var topicViewModel: TopicViewModel
+    private lateinit var topicLiveData: LiveData<List<Topic>>
+    private var adapter: TopicListAdapter? = null
+
+    private fun getObserver() = Observer<List<Topic>> { newsList ->
+        if (newsList != null) {
+            dataList = newsList
+            if (adapter == null) {
+                adapter = TopicListAdapter(context, dataList)
+                adapter!!.onItemClickListener = onItemClickListener
+                recyclerView.layoutManager = LinearLayoutManager(context)
+                recyclerView.adapter = adapter
+            } else {
+                adapter?.data = dataList
+            }
+            smartRefreshLayout.finishLoadmore()
+            smartRefreshLayout.finishRefresh()
+            adapter!!.notifyDataSetChanged()
+            recyclerView.scrollToPosition(dataList.size - PAGE_SIZE)
+        }
+    }
+
     private val onItemClickListener = object : TopicListAdapter.OnItemClickListener {
         override fun onItemClick(view: View, position: Int) {
             val item = dataList[position]
@@ -38,37 +59,15 @@ class TopicFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        getData()
+        topicViewModel = ViewModelProviders.of(this).get(TopicViewModel::class.java)
+        topicLiveData = topicViewModel.getLiveData(PAGE_SIZE)
+        topicLiveData.observe(this, getObserver())
         smartRefreshLayout.setOnRefreshListener {
-            lastCursor = null
-            getData()
+            topicViewModel.refresh()
         }
         smartRefreshLayout.setOnLoadmoreListener {
-            getData()
+            topicViewModel.loadMore()
         }
-    }
-
-    private fun getData() {
-        val observable = DataRepository.getService(context).getTopics(lastCursor, PAGE_SIZE).compose(SchedulerTransformer())
-        observable.subscribe({ data ->
-            if (lastCursor == null) {
-                dataList.clear()
-            }
-            dataList.addAll(dataList.size, data.data?.toList()!!)
-            val adapter = TopicListAdapter(context, dataList)
-            adapter.onItemClickListener = onItemClickListener
-            recyclerView.layoutManager = LinearLayoutManager(context)
-            recyclerView.adapter = adapter
-            lastCursor = data.data?.last()?.order
-            smartRefreshLayout.finishLoadmore()
-            smartRefreshLayout.finishRefresh()
-            adapter.notifyDataSetChanged()
-            recyclerView.scrollToPosition(dataList.size - PAGE_SIZE)
-        }, { error ->
-            error.printStackTrace()
-            smartRefreshLayout.finishLoadmore()
-            smartRefreshLayout.finishRefresh()
-        })
     }
 
     companion object {

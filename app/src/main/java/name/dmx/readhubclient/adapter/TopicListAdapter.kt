@@ -19,7 +19,7 @@ import name.dmx.readhubclient.widgets.TimeTextView
 /**
  * Created by dmx on 17-10-31.
  */
-class TopicListAdapter(private val context: Context, val data: List<Topic>) : RecyclerView.Adapter<TopicListAdapter.MyViewHolder>() {
+class TopicListAdapter(private val context: Context, var data: List<Topic>) : RecyclerView.Adapter<TopicListAdapter.MyViewHolder>() {
     var onItemClickListener: OnItemClickListener? = null
     override fun onBindViewHolder(holder: MyViewHolder?, position: Int) {
         val item = data[position]
