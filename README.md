@@ -8,8 +8,8 @@
 
 ## 界面截图
 
-![](./img/1.jpg)
-![](./img/2.jpg)
+<img src="./img/1.jpg" style="width:300px;">
+<img src="./img/2.jpg" style="width:300px;">
 
 ## 下载地址
 二维码
