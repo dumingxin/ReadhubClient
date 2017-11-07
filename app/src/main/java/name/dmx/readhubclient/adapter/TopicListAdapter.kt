@@ -35,7 +35,7 @@ class TopicListAdapter(private val context: Context, val data: List<Topic>) : Re
     }
 
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): MyViewHolder {
-        val view = LayoutInflater.from(context).inflate(R.layout.toplic_list_item, null, false)
+        val view = LayoutInflater.from(context).inflate(R.layout.toplic_list_item, parent, false)
         val viewHolder = MyViewHolder(view)
         viewHolder.cardView.setOnClickListener {
             onItemClickListener?.onItemClick(viewHolder.cardView, viewHolder.cardView.tag as Int)

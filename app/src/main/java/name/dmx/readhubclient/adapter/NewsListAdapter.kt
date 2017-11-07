@@ -27,7 +27,7 @@ class NewsListAdapter(private val context: Context, val data: List<News>) : Recy
     }
 
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): MyViewHolder {
-        val view = LayoutInflater.from(context).inflate(R.layout.news_list_item, null, false)
+        val view = LayoutInflater.from(context).inflate(R.layout.news_list_item, parent, false)
         val viewHolder = MyViewHolder(view)
         viewHolder.carView.setOnClickListener {
             onItemClickListener?.onItemClick(viewHolder.carView, viewHolder.carView.tag as Int)
