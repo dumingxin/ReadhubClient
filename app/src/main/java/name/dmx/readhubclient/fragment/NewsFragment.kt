@@ -13,10 +13,15 @@ import kotlinx.android.synthetic.main.news_fragment.*
 import name.dmx.readhubclient.R
 import name.dmx.readhubclient.activity.WebViewActivity
 import name.dmx.readhubclient.adapter.NewsListAdapter
+import name.dmx.readhubclient.enum.NewsType
+import name.dmx.readhubclient.getNewsType
 import name.dmx.readhubclient.model.News
+import name.dmx.readhubclient.putNewsType
 import name.dmx.readhubclient.viewmodel.NewsViewModel
+import name.dmx.readhubclient.viewmodel.NewsViewModelFactory
 
 /**
+ * 科技动态、开发者资讯
  * Created by dmx on 17-10-31.
  */
 class NewsFragment : Fragment() {
@@ -25,6 +30,7 @@ class NewsFragment : Fragment() {
     private lateinit var newsViewModel: NewsViewModel
     private lateinit var newsLiveData: LiveData<List<News>>
     private var adapter: NewsListAdapter? = null
+    private var newsType: NewsType = NewsType.TechNews
 
     private fun getObserver() = Observer<List<News>> { newsList ->
         if (newsList != null) {
@@ -44,6 +50,11 @@ class NewsFragment : Fragment() {
         }
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        newsType = arguments?.getNewsType(KEY_NEWS_TYPE)!!
+    }
+
     private val onItemClickListener = object : NewsListAdapter.OnItemClickListener {
         override fun onItemClick(view: View, position: Int) {
             val item = dataList[position]
@@ -59,8 +70,8 @@ class NewsFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        newsViewModel = ViewModelProviders.of(this).get(NewsViewModel::class.java)
-        newsLiveData = newsViewModel.getLiveData(NewsViewModel.NewsType.News, PAGE_SIZE)
+        newsViewModel = ViewModelProviders.of(this, NewsViewModelFactory(newsType, PAGE_SIZE)).get(NewsViewModel::class.java)
+        newsLiveData = newsViewModel.getLiveData()
         newsLiveData.observe(this, getObserver())
         smartRefreshLayout.setOnRefreshListener {
             newsViewModel.refresh()
@@ -71,8 +82,14 @@ class NewsFragment : Fragment() {
     }
 
     companion object {
-        fun newInstance(): NewsFragment {
-            return NewsFragment()
+        val KEY_NEWS_TYPE = "KEY_NEWS_TYPE"
+        fun newInstance(newsType: NewsType): NewsFragment {
+            val fragment = NewsFragment()
+            val bundle = Bundle()
+            bundle.putNewsType(KEY_NEWS_TYPE, newsType)
+            fragment.arguments = bundle
+            return fragment
         }
     }
 }
+

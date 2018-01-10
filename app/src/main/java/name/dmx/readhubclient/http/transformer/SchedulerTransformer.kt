@@ -19,7 +19,6 @@ class SchedulerTransformer<T> : ObservableTransformer<T, T> {
     }
 
     companion object {
-
         fun <T> create(): SchedulerTransformer<T> {
             return SchedulerTransformer()
         }

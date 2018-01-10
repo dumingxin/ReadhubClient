@@ -17,6 +17,7 @@ import name.dmx.readhubclient.model.Topic
 import name.dmx.readhubclient.viewmodel.TopicViewModel
 
 /**
+ * 热门话题
  * Created by dmx on 17-10-31.
  */
 class TopicFragment : Fragment() {

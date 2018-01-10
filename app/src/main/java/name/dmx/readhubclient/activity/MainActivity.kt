@@ -10,12 +10,13 @@ import com.tencent.bugly.beta.Beta
 import kotlinx.android.synthetic.main.activity_main.*
 import name.dmx.readhubclient.R
 import name.dmx.readhubclient.adapter.TabFragmentAdapter
+import name.dmx.readhubclient.enum.NewsType
 import name.dmx.readhubclient.fragment.NewsFragment
-import name.dmx.readhubclient.fragment.TechNewsFragment
 import name.dmx.readhubclient.fragment.TopicFragment
 
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,7 +32,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     private fun init() {
         val titleList = arrayListOf("热门话题", "科技动态", "开发者资讯")
-        val fragmentList = arrayListOf(TopicFragment.newInstance(), NewsFragment.newInstance(), TechNewsFragment.newInstance())
+        val fragmentList = arrayListOf(TopicFragment.newInstance(), NewsFragment.newInstance(NewsType.TechNews), NewsFragment.newInstance(NewsType.DevNews))
         val tabFragmentAdapter = TabFragmentAdapter(supportFragmentManager, fragmentList, titleList)
         viewPager.adapter = tabFragmentAdapter
         tabLayout.setupWithViewPager(viewPager)

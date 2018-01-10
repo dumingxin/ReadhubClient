@@ -15,7 +15,7 @@ android {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         ndk {
             //设置支持的SO库架构
-            abiFilters 'armeabi' //, 'x86', 'armeabi-v7a', 'x86_64', 'arm64-v8a'
+            abiFilters 'armeabi', 'x86', 'armeabi-v7a', 'x86_64', 'arm64-v8a'
         }
         buildConfigField "String", "buglyAppId", project.Bugly_App_Id
     }
@@ -47,10 +47,6 @@ dependencies {
     implementation 'com.just.agentweb:agentweb:2.0.1'
     implementation 'com.tencent.bugly:crashreport_upgrade:latest.release'//其中latest.release指代最新版本号，也可以指定明确的版本号，例如1.2.0
     implementation 'com.tencent.bugly:nativecrashreport:latest.release' //其中latest.release指代最新版本号，也可以指定明确的版本号，例如2.2.0
-//    implementation 'com.aliyun.ams:alicloud-android-feedback:3.1.0@aar'
-//    implementation 'com.aliyun.ams:alicloud-android-utdid:1.1.5.3'
-//    implementation 'com.aliyun.ams:alicloud-android-ut:5.1.0'
-//    implementation 'com.aliyun.ams:alicloud-android-utils:1.0.3'
 
     implementation "android.arch.lifecycle:runtime:1.0.3"
     implementation "android.arch.lifecycle:extensions:1.0.0"
