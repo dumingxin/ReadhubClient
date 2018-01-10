@@ -3,7 +3,7 @@ package name.dmx.readhubclient.widgets
 import android.content.Context
 import android.util.AttributeSet
 import android.widget.TextView
-import name.dmx.readhubclient.util.toDate
+import name.dmx.readhubclient.toDate
 
 /**
  * Created by dmx on 17-10-31.

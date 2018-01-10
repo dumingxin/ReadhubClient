@@ -6,6 +6,7 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 /**
+ * 扩展函数
  * Created by dmx on 2018/1/10.
  */
 fun String.toDate(pattern: String): Date? {
