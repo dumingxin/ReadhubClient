@@ -5,6 +5,7 @@ import android.arch.lifecycle.ViewModelProvider
 import name.dmx.readhubclient.viewmodel.TopicViewModel
 
 /**
+ * 创建带构造参数的ViewModel
  * Created by dmx on 2018/1/10.
  */
 class TopicViewModelFactory(private val pageSize: Int) : ViewModelProvider.Factory {
