@@ -15,7 +15,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 /**
  * Created by dmx on 17-11-7.
  */
-class DataRepository private constructor(private val context: Context) {
+class DataRepository private constructor(context: Context) {
     private val SERVER_ADDRESS = "https://api.readhub.me/"
     private val httpService: Api
 
@@ -41,16 +41,16 @@ class DataRepository private constructor(private val context: Context) {
      * 科技动态
      */
 
-    fun getNews(lastCursor: Long?, pageSize: Int): Observable<PageResult<News>> {
-        return httpService.getNews(lastCursor, pageSize)
+    fun getTechNews(lastCursor: Long?, pageSize: Int): Observable<PageResult<News>> {
+        return httpService.getTechNews(lastCursor, pageSize)
     }
 
     /**
      * 开发者资讯
      */
 
-    fun getTechNews(lastCursor: Long?, pageSize: Int): Observable<PageResult<News>> {
-        return httpService.getTechNews(lastCursor, pageSize)
+    fun getDevNews(lastCursor: Long?, pageSize: Int): Observable<PageResult<News>> {
+        return httpService.getDevNews(lastCursor, pageSize)
     }
 
     companion object {

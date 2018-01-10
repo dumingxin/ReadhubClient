@@ -38,9 +38,9 @@ class NewsViewModel(private val newsType: NewsType, private val pageSize:Int) : 
 
     private fun fetchData() {
         val observable = if (newsType == NewsType.TechNews) {
-            DataRepository.getInstance(MyApplication.instance).getNews(lastCursor, pageSize)
-        } else {
             DataRepository.getInstance(MyApplication.instance).getTechNews(lastCursor, pageSize)
+        } else {
+            DataRepository.getInstance(MyApplication.instance).getDevNews(lastCursor, pageSize)
         }
         observable.compose(SchedulerTransformer())
                 .subscribe({ data ->

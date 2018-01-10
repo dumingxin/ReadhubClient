@@ -19,12 +19,12 @@ interface Api {
      * 科技动态
      */
     @GET("news")
-    fun getNews(@Query("lastCursor") lastCursor: Long?, @Query("pageSize") pageSize: Int): Observable<PageResult<News>>
+    fun getTechNews(@Query("lastCursor") lastCursor: Long?, @Query("pageSize") pageSize: Int): Observable<PageResult<News>>
 
     /**
      * 开发者资讯
      */
     @GET("technews")
-    fun getTechNews(@Query("lastCursor") lastCursor: Long?, @Query("pageSize") pageSize: Int): Observable<PageResult<News>>
+    fun getDevNews(@Query("lastCursor") lastCursor: Long?, @Query("pageSize") pageSize: Int): Observable<PageResult<News>>
 
 }
