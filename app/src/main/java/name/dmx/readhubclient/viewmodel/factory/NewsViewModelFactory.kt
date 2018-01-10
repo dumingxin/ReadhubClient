@@ -1,8 +1,9 @@
-package name.dmx.readhubclient.viewmodel
+package name.dmx.readhubclient.viewmodel.factory
 
 import android.arch.lifecycle.ViewModel
 import android.arch.lifecycle.ViewModelProvider
 import name.dmx.readhubclient.enum.NewsType
+import name.dmx.readhubclient.viewmodel.NewsViewModel
 
 
 /**

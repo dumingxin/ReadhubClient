@@ -18,7 +18,7 @@ import name.dmx.readhubclient.getNewsType
 import name.dmx.readhubclient.model.News
 import name.dmx.readhubclient.putNewsType
 import name.dmx.readhubclient.viewmodel.NewsViewModel
-import name.dmx.readhubclient.viewmodel.NewsViewModelFactory
+import name.dmx.readhubclient.viewmodel.factory.NewsViewModelFactory
 
 /**
  * 科技动态、开发者资讯

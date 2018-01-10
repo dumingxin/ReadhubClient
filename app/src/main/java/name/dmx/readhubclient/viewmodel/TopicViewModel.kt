@@ -11,14 +11,12 @@ import name.dmx.readhubclient.repository.DataRepository
 /**
  * Created by dmx on 17-11-7.
  */
-class TopicViewModel : ViewModel() {
+class TopicViewModel(private val pageSize: Int) : ViewModel() {
     private val liveData: MutableLiveData<List<Topic>> = MutableLiveData()
     private var isFirstPage = true
     private var lastCursor: Long? = null
-    private var pageSize: Int = 0
     private val topicList = ArrayList<Topic>()
-    fun getLiveData(pageSize: Int): LiveData<List<Topic>> {
-        this.pageSize = pageSize
+    fun getLiveData(): LiveData<List<Topic>> {
         fetchData()
         return liveData
     }

@@ -15,6 +15,7 @@ import name.dmx.readhubclient.activity.WebViewActivity
 import name.dmx.readhubclient.adapter.TopicListAdapter
 import name.dmx.readhubclient.model.Topic
 import name.dmx.readhubclient.viewmodel.TopicViewModel
+import name.dmx.readhubclient.viewmodel.factory.TopicViewModelFactory
 
 /**
  * 热门话题
@@ -60,8 +61,8 @@ class TopicFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        topicViewModel = ViewModelProviders.of(this).get(TopicViewModel::class.java)
-        topicLiveData = topicViewModel.getLiveData(PAGE_SIZE)
+        topicViewModel = ViewModelProviders.of(this,TopicViewModelFactory(PAGE_SIZE)).get(TopicViewModel::class.java)
+        topicLiveData = topicViewModel.getLiveData()
         topicLiveData.observe(this, getObserver())
         smartRefreshLayout.setOnRefreshListener {
             topicViewModel.refresh()
