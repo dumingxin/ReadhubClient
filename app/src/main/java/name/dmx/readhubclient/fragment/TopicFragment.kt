@@ -61,14 +61,16 @@ class TopicFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        topicViewModel = ViewModelProviders.of(this,TopicViewModelFactory(PAGE_SIZE)).get(TopicViewModel::class.java)
-        topicLiveData = topicViewModel.getLiveData()
-        topicLiveData.observe(this, getObserver())
-        smartRefreshLayout.setOnRefreshListener {
-            topicViewModel.refresh()
-        }
-        smartRefreshLayout.setOnLoadmoreListener {
-            topicViewModel.loadMore()
+        if (this.activity != null) {
+            topicViewModel = ViewModelProviders.of(this, TopicViewModelFactory(PAGE_SIZE)).get(TopicViewModel::class.java)
+            topicLiveData = topicViewModel.getLiveData()
+            topicLiveData.observe(this, getObserver())
+            smartRefreshLayout.setOnRefreshListener {
+                topicViewModel.refresh()
+            }
+            smartRefreshLayout.setOnLoadmoreListener {
+                topicViewModel.loadMore()
+            }
         }
     }
 

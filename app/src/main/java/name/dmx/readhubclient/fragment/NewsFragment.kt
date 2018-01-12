@@ -70,14 +70,16 @@ class NewsFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        newsViewModel = ViewModelProviders.of(this, NewsViewModelFactory(newsType, PAGE_SIZE)).get(NewsViewModel::class.java)
-        newsLiveData = newsViewModel.getLiveData()
-        newsLiveData.observe(this, getObserver())
-        smartRefreshLayout.setOnRefreshListener {
-            newsViewModel.refresh()
-        }
-        smartRefreshLayout.setOnLoadmoreListener {
-            newsViewModel.loadMore()
+        if (this.activity != null) {
+            newsViewModel = ViewModelProviders.of(this, NewsViewModelFactory(newsType, PAGE_SIZE)).get(NewsViewModel::class.java)
+            newsLiveData = newsViewModel.getLiveData()
+            newsLiveData.observe(this, getObserver())
+            smartRefreshLayout.setOnRefreshListener {
+                newsViewModel.refresh()
+            }
+            smartRefreshLayout.setOnLoadmoreListener {
+                newsViewModel.loadMore()
+            }
         }
     }
 
